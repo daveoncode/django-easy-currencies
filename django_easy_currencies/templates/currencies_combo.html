@@ -1,0 +1,10 @@
+<form action="{% url 'change_currency' %}" method="post" name="currencies">
+    {% csrf_token %}
+    <select name="currency" onchange="document.forms['currencies'].submit()">
+        {% for currency in currencies %}
+            <option value="{{ currency.0 }}"{% if active_currency == currency.0 %} selected="selected"{% endif %}>
+                {{ currency.1 }} ({{ currency.0 }})
+            </option>
+        {% endfor %}
+    </select>
+</form>
