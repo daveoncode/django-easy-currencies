@@ -1,6 +1,7 @@
 # Django Easy Currencies
 
-Simple app to manage currencies convertion in Django using [openexchangerates.org](https://openexchangerates.org) service.
+Simple app to manage currencies conversion in Django using [openexchangerates.org](https://openexchangerates.org) 
+service.
 
 The app will automatically invokes the service and in a **single HTTP call** it will creates all the necessary conversion rates permutations offline **by "bypassing" the free account limitation which limits the source currency to USD** using simple math alghoritms and the excellent Python's `itertools` utilities (so this is 100% legal!).
 
@@ -10,9 +11,11 @@ The app will automatically invokes the service and in a **single HTTP call** it 
 
 ### Installation
 
-1. Get an app key from [openexchangerates.org](https://openexchangerates.org) (you don't need to pay, the basic free account will be enough)
+`pip install django-easy-currencies`
 
-2. Add "django_easy_currencies" to your `INSTALLED_APPS` setting like this:
+### Setup
+
+1. Add "django_easy_currencies" to your `INSTALLED_APPS` setting like this:
 
    ```
    INSTALLED_APPS = (
@@ -20,6 +23,8 @@ The app will automatically invokes the service and in a **single HTTP call** it 
       'django_easy_currencies',
    )
    ```
+   
+2. Get an app key from [openexchangerates.org](https://openexchangerates.org) (you don't need to pay, the basic free account will be enough)
 
 3. Configure the app by providing your app id and the currencies you want to use like this:
 
@@ -64,7 +69,7 @@ The app will automatically invokes the service and in a **single HTTP call** it 
 
 ### Change active currency
 
-The default currency automatically activated by the context porcessor is "**USD**".
+The default currency automatically activated by the context processor is "**USD**".
 To change it "**django_easy_currencies**" provides a custom tag which prints a combo with all the available currencies and calls `ChangeCurrencyView` as soon the user select a new option.
 To use the tag you just need to:
 
@@ -87,7 +92,7 @@ To use the tag you just need to:
 
    `{% local_currency original_price original_currency %}`
    
-   The tag will convert the `original_price` using `original_currency` into the currenct active currency (which is available in template context as "`active_currency`"). And formatting it with the right currency symbol.
+   The tag will convert the `original_price` using `original_currency` into the current active currency (which is available in template context as "`active_currency`"). And formatting it with the right currency symbol.
    
    So, supposing you are going to print a localized book price which originally is **39.50 USD **and the active currency is **EUR**, the result will be something like: **€ 31,26**.
    And in the template it will looks like:
@@ -104,4 +109,8 @@ To use the tag you just need to:
    
    In this way the output will be simply: **31.26**
    
-    
+---
+
+## Credits
+
+**django-easy-currencies** developed by Davide Zanotti - [daveoncode.com](http://www.daveoncode.com) - released under the [MIT license](https://github.com/daveoncode/django-easy-currencies/blob/master/LICENSE).
