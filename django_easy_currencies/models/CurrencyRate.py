@@ -5,6 +5,12 @@ from django.db import models
 
 class CurrencyRateManager(models.Manager):
     def get_rate_values(self, currency):
+        """
+        Returns a dictionary containing conversion rates for the given currency.
+
+        :param currency:
+        :return: :rtype:
+        """
         records = self.select_related().values().filter(original_currency__code=currency)
         rates = {}
         for r in records:
@@ -27,7 +33,7 @@ class CurrencyRate(models.Model):
                                        validators=[MinLengthValidator(3), MaxLengthValidator(3)],
                                        db_index=True,
                                        editable=False)
-    rate = models.DecimalField(max_digits=13, decimal_places=9) # (max: 9999.999999999)
+    rate = models.DecimalField(max_digits=13, decimal_places=9)  # (max: 9999.999999999)
 
     # custom manager
     objects = CurrencyRateManager()

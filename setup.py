@@ -1,14 +1,16 @@
 import os
+
 from setuptools import setup
+
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-easy-currencies',
-    version='0.1.1',
+    version='0.2.0',
     packages=['django_easy_currencies'],
-    install_requires=['django>=1.7', 'Babel>=1.3'],
+    install_requires=['django', 'Babel>=1.3'],
     include_package_data=True,
     license='MIT License',
     description='Simple app to manage currencies conversion in Django using openexchangerates.org service.',

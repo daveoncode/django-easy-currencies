@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from itertools import product
 import os
 from urllib2 import URLError
@@ -76,7 +77,7 @@ class TestCurrenciesCommand(TestCase):
             self.assertIsInstance(r[1], Decimal)
 
     @override_settings(EASY_CURRENCIES={'currencies': (('USD', 'Dollars'), ('EUR', 'Euro')), 'app_id': 'invalid-code'})
-    def test_get_rates_raise_exceptino_if_provided_app_id_is_invalid(self):
+    def test_get_rates_raise_exception_if_provided_app_id_is_invalid(self):
         def bad():
             self.command.get_rates_info(self.command.get_service_url(), self.command.get_currency_list())
 
@@ -101,7 +102,7 @@ class TestCurrenciesCommand(TestCase):
             self.assertEqual(currency.code, c)
 
     @override_settings(EASY_CURRENCIES=VALID_SETTINGS)
-    def test_create_or_update_usd_currency_rates_creates_ecpected_records(self):
+    def test_create_or_update_usd_currency_rates_creates_expected_records(self):
         self.assertEqual(CurrencyRate.objects.count(), 0)
         currencies = self.command.get_currency_list()
         info = self.command.get_rates_info(self.command.get_service_url(), currencies)

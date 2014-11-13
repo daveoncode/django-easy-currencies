@@ -100,7 +100,7 @@ class Command(BaseCommand):
         self.stdout.write('Updating reversed rates for USD currency...')
         for code, currency_obj in currencies.items():
             self.stdout.write('Updating rate {0}/USD'.format(code))
-            rate_value = Decimal('1') if code == 'USD' else Decimal('1') / usd_rates[code]
+            rate_value = Decimal('1') if code == 'USD' else usd_rates[code]
             CurrencyRate.objects.update_or_create(original_currency=currency_obj,
                                                   target_currency='USD',
                                                   defaults={'rate': rate_value})
@@ -120,7 +120,7 @@ class Command(BaseCommand):
             if from_currency == to_currency:
                 rate_value = Decimal('1')
             else:
-                rate_value = Decimal('1') / usd_rates[from_currency] / usd_rates[to_currency]
+                rate_value = usd_rates[to_currency] / usd_rates[from_currency]
             CurrencyRate.objects.update_or_create(original_currency=currencies[from_currency],
                                                   target_currency=to_currency,
                                                   defaults={'rate': rate_value})

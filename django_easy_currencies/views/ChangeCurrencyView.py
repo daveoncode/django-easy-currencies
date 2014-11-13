@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
-from django.http.response import HttpResponseRedirect
+
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.views.generic.base import View
+
+from django.http.response import HttpResponseRedirect
 
 
 class ChangeCurrencyView(View):
