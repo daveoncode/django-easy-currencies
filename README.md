@@ -94,7 +94,8 @@ To use the tag you just need to:
    
    The tag will convert the `original_price` using `original_currency` into the current active currency (which is available in template context as "`active_currency`"). And formatting it with the right currency symbol.
    
-   So, supposing you are going to print a localized book price which originally is **39.50 USD **and the active currency is **EUR**, the result will be something like: **€ 31,26**.
+   So, supposing you are going to print a localized book price which originally is **39.50 USD** and the active 
+   currency is **EUR**, the result will be something like: **€ 31,26**.
    And in the template it will looks like:
    
    `{% local_currency book.price 'USD' %}` 
@@ -108,7 +109,29 @@ To use the tag you just need to:
    `{% local_currency book.price 'USD' False %}`
    
    In this way the output will be simply: **31.26**
+
    
+**If you use `local_currency` tag before to run `currencies --update` command, it will silently returns the original 
+price without conversion.**
+
+---
+
+### Converting prices in your business logic (outside of Django templates)
+
+To convert prices programmatically you can use the `CurrencyConverter` class:
+
+```
+from django_easy_currencies.utils import CurrencyConverter
+
+# ("EUR" is the target currency into which you wish to convert prices)
+converter = CurrencyConverter('EUR') 
+
+# (the first parameter is the price to convert, the second the original currency)
+price1 = converter.convert('99.9', 'USD') 
+```
+
+**If you use the converter before to run `currencies --update` command, it will raise an `CurrencyConverterException`**.
+
 ---
 
 ## Credits
